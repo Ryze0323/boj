@@ -1,0 +1,71 @@
+#include<iostream>
+#include<string>
+#include<vector>
+using namespace std;
+string A, B;
+int comparebox[1004][1004];
+int maxvalue(int a, int b) {
+	if (a>b)
+	{
+		return a;
+	}
+	return b;
+}
+int number = 1;
+vector<char> ve;
+int main() {
+	//freopen("Text.txt", "r", stdin);
+	
+	cin >> A >> B;
+	for (int j = 2; j <= B.size() + 1; j++)
+	{
+		for (int i = 1; i <= A.size(); i++)
+		{
+			if (B[j - 2] == A[i - 1])
+			{
+				comparebox[j][i] = comparebox[j-1][i-1] + 1;
+			}
+			else
+			{
+				comparebox[j][i] = maxvalue(comparebox[j][i - 1], comparebox[j - 1][i]);
+			}
+		}
+	}
+
+	cout << comparebox[B.size() + 1][A.size()] << endl;
+
+	int y = B.size() + 1;
+	int x = A.size();
+	while (comparebox[y][x]>0)
+	{
+		if (comparebox[y][x]== comparebox[y- 1][x])
+		{
+			y--;
+		}
+		else if (comparebox[y][x] == comparebox[y][x-1])
+		{
+			x--;
+		}
+		else
+		{
+			ve.push_back(A[x-1]);
+			y--;
+			x--;
+		}
+	}
+
+	if (comparebox[B.size() + 1][A.size()] ==0)
+	{
+		cout << endl;
+	}
+	else
+	{
+		for (int i = ve.size()-1; i >= 0; i--)
+		{
+			cout << ve[i];
+		}
+	}
+		
+	
+	return 0;
+}
