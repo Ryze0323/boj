@@ -201,53 +201,55 @@
 
  > optional chaining   
   ```javascript
-     const name = person?.name   
-     const name = person === null || person === undefined ? undefined : person.name   
+    const name = person?.name   
+    const name = person === null || person === undefined ? undefined : person.name   
   ```
    * 위의 두 문법이 동일함   
    * 함수의 경우 실행전 => () 전에 ?. 추가시 해당 함수가 할당되었는지 판단가능   
-   * nullish coalescing과 함께 쓰기 좋음 
+   * nullish coalescing과 함께 쓰기 좋음   
    ```javascript  
-     const name = person?.friends?.[0] ?? 'default name'   
+    const name = person?.friends?.[0] ?? 'default name'   
    ```
  
  > shorthand property names(단축 속성명)   
   ```javascript
-      // 사용 X   
-      function makePerson1(age, name) {
-        return {age:age, name: name};
-      }
+    // 사용 X   
+    function makePerson1(age, name) {
+      return {age:age, name: name};
+    }
      
-      // 사용 O
-      function makePerson2(age, name) {
-        return {age, name}
-      }
-  ex2) const name = 'mike', age = 21
-       console.log({name, age})
+    // 사용 O
+    function makePerson2(age, name) {
+      return {age, name}
+    }
+     
+    // 사용 방법2
+    const name = 'mike', age = 21
+    console.log({name, age})
   ```   
  
  > computed property names(계산된 속성명)
   ```javascript
-      // 사용 X
-      function makeObject1(key, value) {
-        const obj = {}
-        obj[key] = value
-        return obj
-      }
+    // 사용 X
+    function makeObject1(key, value) {
+      const obj = {}
+      obj[key] = value
+      return obj
+    }
      
-      // 사용 O
-      function makeObject1(key, value) {
-        return { [key]: value }
-      }
+    // 사용 O
+    function makeObject1(key, value) {
+      return { [key]: value }
+    }
    ```   
    
  > spread operator(전개 연산자): 배열이나 객체의 모든 속성을 풀어 놓을 때 사용하는 문법
   * 장점 기존의 배열이나 객체의 값을 변경 시키지 않고 깊은 복사(?, 1단계 복사)가 가능함
   ```javascript
-       const arr = [1,2,3,4]
-       const arr2 = [...arr]
-       const arr3 = arr
-       arr2.push(5)
-       arr3.push(6)
-       console.log(arr,arr2, arr3) = > [1,2,3,4,6], [1,2,3,4,5], [1,2,3,4,6] 
+     const arr = [1,2,3,4]
+     const arr2 = [...arr]
+     const arr3 = arr
+     arr2.push(5)
+     arr3.push(6)
+     console.log(arr,arr2, arr3) // [1,2,3,4,6], [1,2,3,4,5], [1,2,3,4,6] 
   ```
