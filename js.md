@@ -188,56 +188,66 @@
      console.log({b})
   ```
  
- 객체의 비구조화는 키를 중점으로 값을 가져옴 따라서 키가 없으면 undefined가 할당됨   
- 객체 비구조화에서 undefined만 기본값이 할당되고 null은 할당되지 않음   
+  * 객체의 비구조화는 키를 중점으로 값을 가져옴 따라서 키가 없으면 undefined가 할당됨   
+  * 객체 비구조화에서 undefined만 기본값이 할당되고 null은 할당되지 않음   
 
  > nullish coalessing : 기본값 할당 문법   
+  ```javascript
     const name = person.name ?? 'unknown'   
     const name = person.name === null || person.name === undefined ? 'unknown' : person.name   
-    위의 두 문장이 동일한 문장임   
-    단점: 0이나 ''의 경우 기본값이 있다고 판단함 -> 빈문자열이나 0을 값으로 인정하면 ?? 사용 아니면 || 사용   
-    논리연산자와 사용시 ()로 묶어줘야함 (a || b) ?? 'dfdf' 이런식으로   
+  ```
+   * 단점: 0이나 ''의 경우 기본값이 있다고 판단함 -> 빈문자열이나 0을 값으로 인정하면 ?? 사용 아니면 || 사용   
+   * 논리연산자와 사용시 ()로 묶어줘야함 (a || b) ?? 'dfdf' 이런식으로   
 
  > optional chaining   
- ex) const name = person?.name   
+  ```javascript
+     const name = person?.name   
      const name = person === null || person === undefined ? undefined : person.name   
-     위의 두 문법이 동일함   
- 함수의 경우 실행전 => () 전에 ?. 추가시 해당 함수가 할당되었는지 판단가능   
- - nullish coalescing과 함께 쓰기 좋음   
-  ex) const name = person?.friends?.[0] ?? 'default name'   
+  ```
+   * 위의 두 문법이 동일함   
+   * 함수의 경우 실행전 => () 전에 ?. 추가시 해당 함수가 할당되었는지 판단가능   
+   * nullish coalescing과 함께 쓰기 좋음 
+   ```javascript  
+     const name = person?.friends?.[0] ?? 'default name'   
+   ```
  
- > spread operator   
- - shorthand property names(단축 속성명)   
-  ex) 사용 X   
+ > shorthand property names(단축 속성명)   
+  ```javascript
+      // 사용 X   
       function makePerson1(age, name) {
         return {age:age, name: name};
       }
      
-      사용 O
+      // 사용 O
       function makePerson2(age, name) {
         return {age, name}
       }
   ex2) const name = 'mike', age = 21
        console.log({name, age})
-      
+  ```   
+ 
  > computed property names(계산된 속성명)
-  ex) 사용 X
+  ```javascript
+      // 사용 X
       function makeObject1(key, value) {
         const obj = {}
         obj[key] = value
         return obj
       }
      
-      사용 O
+      // 사용 O
       function makeObject1(key, value) {
         return { [key]: value }
       }
-
+   ```   
+   
  > spread operator(전개 연산자): 배열이나 객체의 모든 속성을 풀어 놓을 때 사용하는 문법
-   장점 기존의 배열이나 객체의 값을 변경 시키지 않고 깊은 복사(?, 1단계 복사)가 가능함
-   ex) const arr = [1,2,3,4]
+  * 장점 기존의 배열이나 객체의 값을 변경 시키지 않고 깊은 복사(?, 1단계 복사)가 가능함
+  ```javascript
+       const arr = [1,2,3,4]
        const arr2 = [...arr]
        const arr3 = arr
        arr2.push(5)
        arr3.push(6)
        console.log(arr,arr2, arr3) = > [1,2,3,4,6], [1,2,3,4,5], [1,2,3,4,6] 
+  ```
