@@ -5,14 +5,34 @@
   > hoisting: 선언을 맨위로 올려 먼저하는거  
  
   ```javascript
-  console.log(test1)
-  console.log(test2)
-  console.log(test3)
-  var test1 = 'var'
-  let test2 = 'let'
-  const test3 = 'const'
+     console.log(test1)
+     console.log(test2)
+     console.log(test3)
+     var test1 = 'var'
+     let test2 = 'let'
+     const test3 = 'const'
   ```
-  > 스코프(scrope)  
+  > 스코프(scrope): 변수 에 접근할 수 있는 범위   
+   * 함수 레벨 스코프: 함수 내 선언된 변수는 함수내에서만 참조 가능   
+   * 블록 레벨 스코프: 코드 블록(함수, if, for문 등등) 내에서 선언된 변수는 코드 블록 내부에서만 유효함   
+   * var의 경우 함수레벨 스코프를 let, const의 경우 블록 레벨 스코프를 따른다.   
+   ```javascript
+      var foo = 123
+      console.log(foo)
+      {
+        var foo = 456
+      }
+      console.log(foo)
+      
+      let foo2 = 123
+      console.log(foo2)
+      {
+        let foo2 = 456
+        let foo3 = 789
+      }
+      console.log(foo2)
+      console.log(foo3)
+   ```
  
   > 선언과 할당에 따른 선언방식의 차이점  
  
@@ -143,11 +163,11 @@
   let deepCopy = function (a) {
     let rst
     let isArray
-    if (object.prototype.toString.call(a).indexOf('Array') > -1) {
+    if (Object.prototype.toString.call(a).indexOf('Array') > -1) {
         rst = []
         isArray = true
     }
-    else if (object.prototype.toString.call(a).indexOf('Object') > -1) {
+    else if (Object.prototype.toString.call(a).indexOf('Object') > -1) {
         rst = {}
         isArray = false
     } else {
@@ -155,8 +175,8 @@
     }
     for(let item in a) {
         let tmp
-        if(object.prototype.toString.call(a[item]).indexOf('Array') > -1 ||
-           object.prototype.toString.call(a[item]).indexOf('Object') > -1){
+        if(Object.prototype.toString.call(a[item]).indexOf('Array') > -1 ||
+           Object.prototype.toString.call(a[item]).indexOf('Object') > -1){
             tmp = deepCopy(a[item])
         } else {
             tmp = a[item]
