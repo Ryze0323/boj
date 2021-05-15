@@ -3,6 +3,7 @@
 ### var, let, const  
   변수 선언 방식으로 모두 hoisting 함  
   > hoisting: 선언을 맨위로 올려 먼저하는거  
+   * Temporal Dead Zone: 변수가 초기화되기 전에 액세스하려고 하면, var처럼 undefined를 반환하지 않고, ReferenceError가 발생
  
   ```javascript
      console.log(test1)
@@ -222,13 +223,13 @@
  > optional chaining   
   ```javascript
     const name = person?.name   
-    const name = person === null || person === undefined ? undefined : person.name   
+    const name = person.name === null || person.name === undefined ? undefined : person.name   
   ```
    * 위의 두 문법이 동일함   
    * 함수의 경우 실행전 => () 전에 ?. 추가시 해당 함수가 할당되었는지 판단가능   
    * nullish coalescing과 함께 쓰기 좋음   
    ```javascript  
-    const name = person?.friends?.[0] ?? 'default name'   
+    const name = person.friends?.[0] ?? 'default name'   
    ```
  
  > shorthand property names(단축 속성명)   
