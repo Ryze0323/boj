@@ -386,3 +386,92 @@ x => x * x             // 위와 같은 형태로 한줄의 구문이라면 중�
    ```   
   
    * 주의: arrow Function의 경우 call, apply, bind를 통해 this를 변경 불가
+
+##### 모듈
+ 애플리케이션을 구성하는 개별적 요소로서 재사용 가능한 코드 조각
+ 
+  * 모듈 스코프
+   ES6 모듈 기능을 사용하지 않으면 분리된 자바스크립트 파일에 독자적인 스코프를 갖지 않고 하나의 전역을 공유함
+    
+    * 기존   
+      * foo.js   
+      
+      ```javascript
+      var x = 'foo'; // var로 선언하였기에 전역변수이며 window 객체 프로퍼티임
+      
+      console.log({x});
+      console.log(window.x);
+      ```
+      
+      * bar.js   
+      ```javascript
+      var x = 'bar';
+  
+      console.log({x});
+      console.log(window.x);
+      ```
+      
+      * foobar.js   
+      ```javascript
+      console.log({x});
+      console.log(window.x);
+      ```
+      
+      * test.html
+      ```html
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <script src="foo.js"></script>
+        <script src="bar.js"></script>
+        <script src="foobar.js"></script>
+      </body>
+      </html>
+      ```
+      
+      * 따라서 위의 경우 의도치 않게 foo에서 선언한 x를 bar에서 덮어 씌움   
+    
+    
+    * 모듈 스코프 적용   
+    
+      * foo.js
+      ```javascript
+      var x = 'foo';
+  
+      console.log(x);
+      
+      console.log(window.x); // var로 선언하더라도 더 이상 전역 변수가 아니며 window 객체 프로퍼티도 아님
+      ```
+      
+      * bar.js
+      ```javascript
+      var x = 'bar';
+  
+      console.log(x);
+      
+      console.log(window.x);
+      ```
+      
+       * foobar.js   
+      ```javascript
+      console.log({x});
+      console.log(window.x);
+      ```
+      
+      * test.html
+      ```html
+      <!DOCTYPE html>
+      <html>
+      <body>
+        <script type="module" src="foo.mjs"></script>
+        <script type="module" src="bar.mjs"></script>
+        <script type="module" src="foobar.mjs"></script>
+      </body>
+      </html>
+      ```
+      
+      > 참고   
+      
+       위의 소스를 그대로 실행시 CORS policy error 발생 따라서 npx http-server를 통해 서버를 띄우고 실행
+
+  * export 스코프   
