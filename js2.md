@@ -186,14 +186,75 @@ console.log(_.map(['1', '2'], 'user'));
   </div>
 </details>  
 
-#####  _.partition(collection, iterator)   
-
 #####  _.forEach(collection, iterator)   
-
-#####  _.forIn(object, iterator)   
+ for과 비슷한 형태로 첫 파라미터가 value, 두번째 파라미터가 key임
+ 
+```javaScript
+  _.forEach([1, 2], function(value, key) {
+    console.log({value});
+    console.log({key});
+  });
+  
+  _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
+    console.log({value});
+    console.log({key});
+  });
+```
 
 #####  _.filter(collection, 콜백함수)
+ 배열 안에 요소들 중, 특정 값만 filter하고 싶을때
 
-#####  _.reject(collection, 콜백함수)
+```javaScript
+  var users = [
+    { 'user': '1', 'age': 36, 'active': true },
+    { 'user': '2',  'age': 40, 'active': false }
+  ];
+  
+  console.log(_.filter(users, function(o) { return !o.active; }));
+  console.log(_.filter(users, { 'age': 36, 'active': true }));
+  console.log(_.filter(users, ['active', false]));
+  console.log( _.filter(users, 'active'));
+```
 
 #####  _.isEmpty(collection)   
+ 해당 필드가 비어있는지 여부를 리턴. 비어있으면 true, 아니면 false   
+
+```javaScript
+let testString = "12";
+let testString1 = "";
+let testString2 = " ";
+
+let testNumber = 1;
+let testNumber1 = 0;
+
+let testUndefined;
+let testNull = null;
+
+let testObject = {};
+let testObject1 = {'test': 1};
+
+let testArray = [];
+let testArray1 = ['1'];
+
+let testBoolean = false;
+let testBoolean1 = true;
+
+console.log(_.isEmpty(testString));
+console.log(_.isEmpty(testString1));
+console.log(_.isEmpty(testString2));
+console.log();
+console.log(_.isEmpty(testNumber));
+console.log(_.isEmpty(testNumber1));
+console.log();
+console.log(_.isEmpty(testUndefined));
+console.log(_.isEmpty(testNull));
+console.log();
+console.log(_.isEmpty(testObject));
+console.log(_.isEmpty(testObject1));
+console.log();
+console.log(_.isEmpty(testArray));
+console.log(_.isEmpty(testArray1));
+console.log();
+console.log(_.isEmpty(testBoolean));
+console.log(_.isEmpty(testBoolean1));
+```
