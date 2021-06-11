@@ -258,3 +258,131 @@ console.log();
 console.log(_.isEmpty(testBoolean));
 console.log(_.isEmpty(testBoolean1));
 ```
+
+### ES6 문법 정리   
+ 다양한 웹 브라우저에서 자바스크립트가 공통되게 잘 작동하기 위해서 표준규격
+ 
+##### Arrows Function
+ 문법을 사용하는 축약형 함수
+ 
+ * 매개변수 지정 방법   
+ 
+ ```
+ () => { ... } // 매개변수가 없을 경우
+ x => { ... } // 매개변수가 한 개인 경우, 소괄호를 생략할 수 있다.
+(x, y) => { ... } // 매개변수가 여러 개인 경우, 소괄호를 생략할 수 없다.
+ ```
+ 
+ * 함수 몸체 지정 방법   
+ 위와 아래가 같은 형태를 지님
+
+ ```
+x => { return x * x } 
+x => x * x             // 위와 같은 형태로 한줄의 구문이라면 중괄호를 생략 가능
+
+() => { return { a: 1 }; }
+() => ({ a: 1 }) // 위와 같은 형태로 객체 반환시 소괄호를 사용함
+ ```
+ 
+ * this   
+  일반 함수와 매우 큰 차이점을 지님
+  
+   * 일반함수: 함수를 호출할 때 함수가 어떻게 호출되었는지에 따라 this에 바인딩할 객체가 동적으로 결정됨   
+   * arrow function: 언제나 상위 스코프의 this를 가리킴. 이걸 Lexical this라 부름   
+   * 예시(일반함수)   
+   
+   ```javascript
+    function Prefixer(prefix) {
+        this.prefix = prefix;
+    }
+      
+    Prefixer.prototype.prefixArray = function (arr) {
+        console.log('A');
+        console.log(this); // this는 생성자 함수 Prefixer가 생성한 객체, 즉 생성자 함수의 인스턴스(pre)
+        console.log('A');
+        return arr.map(function (x) {
+            console.log('B');
+            console.log(this); // 전역 객체 window
+            console.log('B');
+            return this.prefix + ' ' + x;
+        });
+    };
+      
+    var pre = new Prefixer('Hi');
+    console.log(pre.prefixArray(['Lee', 'Kim']));
+   
+   ```
+   * 콜백함수의 내부 this를 생성자 함수 인스턴스로 가르키는 방법 3가지
+   
+   ```javascript
+    function Prefixer(prefix) {
+        this.prefix = prefix;
+    }
+    // 1. 다른 변수를 만들어 this를 매핑한다
+    Prefixer.prototype.prefixArray = function (arr) {
+      var that = this;  // this: Prefixer 생성자 함수의 인스턴스
+      console.log('A');
+      console.log(this);
+      console.log('A');
+      return arr.map(function (x) {
+          console.log('B');
+          console.log(that);
+          console.log('B');
+          return that.prefix + ' ' + x;
+      });
+    };
+    
+    // this를 넘긴다?
+    Prefixer.prototype.prefixArray = function (arr) {
+        console.log('A');
+        console.log(this);
+        console.log('A');
+        return arr.map(function (x) {
+            console.log('B');
+            console.log(this);
+            console.log('B');
+            return this.prefix + ' ' + x;
+        }, this); // this: Prefixer 생성자 함수의 인스턴스
+    };
+    
+    // bind 함수를 이용하여 this를 바인드 한다
+    Prefixer.prototype.prefixArray = function (arr) {
+        console.log('A');
+        console.log(this);
+        console.log('A');
+        return arr.map(function (x) {
+            console.log('B');
+            console.log(this);
+            console.log('B');
+            return this.prefix + ' ' + x;
+        }.bind(this)); // this: Prefixer 생성자 함수의 인스턴스
+    };
+      
+    var pre = new Prefixer('Hi');
+    console.log(pre.prefixArray(['Lee', 'Kim']));
+   
+   ```
+   
+   * 예시(arrow fuction)   
+   
+   ```javascript
+   function Prefixer(prefix) {
+      this.prefix = prefix;
+   }
+      
+   Prefixer.prototype.prefixArray = function (arr) {
+      console.log('A');
+      console.log(this);
+      console.log('A');
+      return arr.map(x => {
+          console.log('B')
+          console.log(this)
+          console.log('B')
+      return `${this.prefix}  ${x}`});
+    };
+      
+    const pre = new Prefixer('Hi');
+    console.log(pre.prefixArray(['Lee', 'Kim']));
+   ```   
+  
+   * 주의: arrow Function의 경우 call, apply, bind를 통해 this를 변경 불가
