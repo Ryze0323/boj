@@ -390,7 +390,7 @@ x => x * x             // 위와 같은 형태로 한줄의 구문이라면 중�
 ##### 모듈
  애플리케이션을 구성하는 개별적 요소로서 재사용 가능한 코드 조각
  
-  * 모듈 스코프
+  * 모듈 스코프   
    ES6 모듈 기능을 사용하지 않으면 분리된 자바스크립트 파일에 독자적인 스코프를 갖지 않고 하나의 전역을 공유함
     
     * 기존   
@@ -472,6 +472,59 @@ x => x * x             // 위와 같은 형태로 한줄의 구문이라면 중�
       
       > 참고   
       
-       위의 소스를 그대로 실행시 CORS policy error 발생 따라서 npx http-server를 통해 서버를 띄우고 실행
+       위의 소스를 그대로 실행시 CORS policy error 발생함.   
+       따라서 npx http-server를 통해 서버를 띄우고 실행
 
-  * export 스코프   
+  * export/import 스코프   
+   
+    * export: 모듈의 모든 식별자는 기본적으로 해당 스코프 내부에서만 사용 가능하지만 외부에서 사용할 수 있도록 하고 싶을 때 사용   
+    
+    * import: export에서 공개한 식별자를 로드하는 키워드   
+    
+      * lib.mjs(export 파일)
+
+       ```javascript
+       const pi = Math.PI;
+
+       function square(x) {
+         return x * x;
+       }
+
+       class Person {
+         constructor(name) {
+           this.name = name;
+         }
+       }
+
+       export { pi, square, Person };
+       ```
+
+      * libTest.js(import 파일 기본)
+
+       ```javascript
+       import { pi, square, Person } from './lib.js';
+
+       console.log(pi);         // 3.141592653589793
+       console.log(square(10)); // 100
+       console.log(new Person('Lee')); // Person { name: 'Lee' }
+       ```
+
+      * &#42; as 전체 와 같이 사용 가능   
+
+       ```javascript
+       import * as lib2 from './lib.js';
+
+       console.log(lib2.pi);         // 3.141592653589793
+       console.log(lib2.square(10)); // 100
+       console.log(new lib2.Person('Lee')); // Person { name: 'Lee' }
+       ```
+
+      * 이름 변경하여 import도 가능   
+
+       ```javascript
+       mport { pi as PI, square as sq, Person as P } from from './lib.js';
+
+       console.log(PI);    // 3.141592653589793
+       console.log(sq(2)); // 4
+       console.log(new P('Kim')); // Person { name: 'Kim' }
+       ```
