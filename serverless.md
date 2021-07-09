@@ -20,7 +20,7 @@
   
 ##### 서버리스 구조   
 
-![ex_screenshot](./image/faas.jpg)
+![ex_screenshot](./image/faas.jpg){: width="300"}
 
  - client에서 Authentication Service 호출 후 인증을 받고 API Gateway 호출하여 원하는 함수에 접근 하는 구조   
 
