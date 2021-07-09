@@ -1,6 +1,6 @@
-# aws Lambda로 시작하는 서버리스
+# aws Lambda로 시작하는 서버리스   
 
-### 서버리스
+### 서버리스   
 
 ##### 서버리스란   
 
@@ -11,7 +11,7 @@
 ##### 서버리스의 형태   
 
  - BaaS(Backend as a Service): 백엔드의 부분 부분을 서비스로 제공 받는 것   
-   * 해당 환경이 만들어진 이뉴는 클라이언트 환경의 발전 때문에
+   * 해당 환경이 만들어진 이유는 클라이언트 환경의 발전 때문에   
  - FaaS(Function as a Service): 실행할 함수 단위만 개발   
    * 서버를 구성하고 코드를 배포하던 형식을 줄이고, 원하는 로직만 함수 기반으로 구현   
    * 함수 호출 시 컨터이너(또는 VM)이 실행되며 정의한 함수가 런타임 내 실행된 다음 컨테이너가 종료됨   
@@ -22,9 +22,9 @@
 
 ![ex_screenshot](./image/faas.jpg)
 
- - client에서 Authentication Service 호출 후 인증을 받고 API Gateway 호출하여 원하는 함수에 접근 하는 구조
+ - client에서 Authentication Service 호출 후 인증을 받고 API Gateway 호출하여 원하는 함수에 접근 하는 구조   
 
-##### Scale-out과 Scale-Up
+##### Scale-out과 Scale-Up   
 
  - 스케일 아웃: 서버 여러대를 추가하여 시스템 확장하는 방법으로 서버별 균등 배분을 위해 로드밸런서가 필수임   
  - 스케일 업: CPU나 RAM을 업그레이드 하는 방식   
@@ -53,6 +53,27 @@
 ##### AWS Lambda의 동작   
 
  - AWS Lambda는 이벤트를 감지하여 아마존 리눅스 환경의 Micro VM을 띄우고 함수를 실행함   
+   * 즉 람다 실행 -> 언어별 런타임 환경 준비 -> 환경 변수 등 실행 환경 맞춤 -> Micro VM 실행 -> 이벤트 처리   
+ - 바로 처리가 아닌 일련의 과정이 있기에 Cold Start 발생   
  
+##### AWS Lambda의 Cold Start 그리고 Warm Start   
+ 
+![ex_screenshot](./image/lifeCycle.png)   
+
+ - micro Vm이 올라갔다 내려간 뒤 다시 실행하면 Full cold start 부터 시작
+ - Micro VM 유지 되는 시간에 요청 오면 Partial cold Start 가 바로 진행
+ - cold start를 줄일 수 있는 쉬운 방안은 지속적인 호출을 통해 micro Vm을 유지하는 방안임
+ 
+##### AWS Lambda의 런타임   
+ 
+ - 사용시 다른 언어들로 작성한 코드들도 동일한 기본 환경에서 실행 가능함   
+ - AWS Lambda 서비스와 작성한 함수 코드 사이에 위치해 이벤트와 컨텍스트 정보 등 응답을 중계해주는 역할을 수행   
+ - 함수 생성시 런타임을 선택 가능하며 필요시 런타임 환경을 변경 가능함   
+ - 런타임 지원이 중단 되면 Lambda는 호출을 비활성화하며 사용 중단된 런타임은 보안 업데이틀 기술지원을 받을 수 없기에 마이그레이션이 필수적임   
+ 
+##### AWS Lambda의 Event   
+ 
+ -    
+
  
 ### API Gateway
