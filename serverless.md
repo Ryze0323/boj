@@ -58,7 +58,7 @@
  
 ##### AWS Lambda의 Cold Start 그리고 Warm Start   
  
-![ex_screenshot](./image/lifeCycle.png){: width="100%"}  
+![ex_screenshot](./image/lifeCycle.png){: width="100%" height="100%"} 
 
  - micro Vm이 올라갔다 내려간 뒤 다시 실행하면 Full cold start 부터 시작
  - Micro VM 유지 되는 시간에 요청 오면 Partial cold Start 가 바로 진행
