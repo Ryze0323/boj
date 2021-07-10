@@ -153,6 +153,13 @@
 <img src="./image/http vs rest 1.png" width="100%">   
 <img src="./image/http vs rest 2.png" width="100%">   
 
+### WebSocket API   
+
+ - 웹버전의 TCP 또는 Socket을 이용하여 서버와 클라이언트 간 소켓 연결을 통해 양 뱡혹 또는 데이터 전송이 가능한 기술   
+ - 최초 접속 시에는 HTTP를 사용하지만 연결 후 Websocket의 독자적인 프로토콜로 이루어짐   
+ 
+<img src="./image/webSocket.png" width="100%">   
+
 ## 메시징 서비스   
 
 ### AaMazon SQS   
