@@ -151,7 +151,7 @@
  - HTTP API와 REST API 지원 정보   
 
 <img src="./image/http vs rest 1.png" width="100%">   
-<img src="./image/http vs rest 1.png" width="100%">   
+<img src="./image/http vs rest 2.png" width="100%">   
 
 ## 메시징 서비스   
 
