@@ -126,6 +126,32 @@
 
 ### REST API
 
+ - 자원에 고유한 URI를 부여하는 방식   
+ - 특징   
+   * 클라이언트/서버   
+     - 서버의 경우 API를 제공하고 클라이언트에서 사용자 인증아니 컨텍스트 등을 직접 관리하는 구조로 서로의 역활이 명확하기에 의존성이 낮아짐   
+   * 무상태   
+     - 상태가 존재 하지 않으며 요청 받은 정보에 대해 주고 받기만 함   
+   * 캐싱 처리 가능   
+     - HTTP 프로토콜 표준에서 사용하는 Last-Modified 태그나 E-Tag를 이용하여 캐싱 구현 가능   
+   * 계층화   
+     - 서버의 경우 다중 계층으로 구성 가능하며 보안, 암호화 계층, 로드 밸런싱을 추가하여 구조적으로 유연하게 관리 가능   
+   * Code-On-Demand   
+     - 서버로부터 스크립트를 받아 클라이언트에서 실행 가능   
+   * 인터페이스의 일관성   
+     - URI로 지정한 자원(Resource)에 대해 통일된 인터페이스를 수행하는 아키텍처 스타일로 언어나 플랫폼에 구애 받지 않지만 아래와 같은 일관성 제약조건이 필요함   
+       * Identification of resources: Resource를 URI로 식별한다   
+       * Manipulation of resources through representations: Representations(PUT, GET, DELETE, POST 등)를 전송하여 Resource를 조작한다   
+       * Self-Descriptive Messages: 메시지만으로 어떤 기능인지 이해할 수 있어야 한다. HTTP URI는 자원을, HTTP Method는 행위를, MIME Type은 표현 방식을 의미한다
+
+### HTTP API와 REST API 선택기준   
+
+ - 금액의 경우 HTTP API가 3배 저렴하며  대기시간 또한 최대 60% 이상 줄일 수 있음   
+ - HTTP API의 경우 프록시 기능만 제공하며 그에 최적화 되어 있음   
+ - HTTP API와 REST API 지원 정보   
+
+<img src="./image/http vs rest 1.png" width="100%">   
+<img src="./image/http vs rest 1.png" width="100%">   
 
 ## 메시징 서비스   
 
