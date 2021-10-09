@@ -54,31 +54,31 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
 ## 인증프로세스 상세(생활코딩 참고)
 
 - 등록
-  ![image6](.\image\oauth\image6)
+  ![image6](./image/oauth/image6)
   
    client를 Resource Server에 등록해야함
   
-  ![image7](.\image\oauth\image7)
+  ![image7](./image/oauth/image7)
   
   등록시 위와 같은 데이터 필요
   
 - Resource Owner의 승인
 
-  ![image8](.\image\oauth\image8)
+  ![image8](./image/oauth/image8)
 
   이런 상황에서 Resource Server의 경우 여러 A,B,C,D 라는 기능을 가지고 있다고 가정하자
 
   
 
-  ![image9](.\image\oauth\image9.png)
+  ![image9](./image/oauth/image9.png)
 
   Clinet에서 존재하는 버튼의 경우 위의 오른쪽과 같은 형식을 통해 Resource Server를 호출함
 
-  ![image10](.\image\oauth\image10.png)
+  ![image10](./image/oauth/image10.png)
   Resource Server가 Resoucre Owner가 로그인이 되어있는지 확인함
   만일 로그인이 되어 있지 않으면 아래와 같이 로그인을 요구함
 
-  ![image11](.\image\oauth\image11.png)
+  ![image11](./image/oauth/image11.png)
 
   로그인이 되어 있거나 로그인에 성공시 이 때서야 Resource Server가 접속한 Client_id와 Redirect_url를 확인함
 
@@ -86,9 +86,9 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
 
   같을 경우 Resource Server가 Resource Owner에게 해당 권한에 대해 확인하는 메시지 전송
 
-  ![image12.png](.\image\oauth\image12.png)
+  ![image12.png](./image/oauth/image12.png)
 
-  ![image13.png](.\image\oauth\image13.png)
+  ![image13.png](./image/oauth/image13.png)
 
   Server나 DB에서 user id가 b,c나 권한에 대해 허용했다고 저장함
 
@@ -96,21 +96,21 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
 
   바로 토큰을 발급하는것이 아닌 auothorization code라는 임시 비밀번호를 Reource Owner에게 전송함
 
-  ![image14.png](.\image\oauth\image14.png)
+  ![image14.png](./image/oauth/image14.png)
 
    응답header에 Location 부분에 줌으로써 redirection을 호출함
 
-    ![image15.png](.\image\oauth\image15.png)
+    ![image15.png](./image/oauth/image15.png)
 
   
 
-  ![image16.png](.\image\oauth\image16.png)
+  ![image16.png](./image/oauth/image16.png)
 
   client는 Resource Server에 위와 같은 데이터를 전송함. Resource Server는 authorization Code를 통해 Client id, secret, redirect uri과 동일 한지 확인함
 
 - 액세스 토큰 발급
 
-  ![image17.png](.\image\oauth\image17.png)
+  ![image17.png](./image/oauth/image17.png)
   authorization Code는 인증 받았기에 삭제하고 Resource Server가 Client에게 AccessToken을 반환함
 
 - API 호출
