@@ -120,3 +120,9 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
 - refresh token
 
   access token의 경우 수명이 존재함. 새롭게 access token을 발급받는 방법. RFC 6749(Oauth 2.0에 관한 표준 문서)를 참고
+  
+  refresh token의 경우 access token을 발급할때 함께 발급이 됨
+  
+  refresh token의 경우 api 호출 중 invalid token Error 발생시 refesh token을 보내 다시 access token을 새로 발급함
+  
+  이때 refresh token도 같이 발급 될 수 도 있음.
