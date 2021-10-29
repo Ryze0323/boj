@@ -82,7 +82,7 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
 
   로그인이 되어 있거나 로그인에 성공시 이 때서야 Resource Server가 접속한 Client_id와 Redirect_url를 확인함
 
-  만일 Resource Server가 지니는 Client_id와 Redirect ULR이 상이할 경우 접속을 끊음
+  만일 Resource Server가 지니는 Client_id와 Redirect URL이 상이할 경우 접속을 끊음
 
   같을 경우 Resource Server가 Resource Owner에게 해당 권한에 대해 확인하는 메시지 전송
 
@@ -94,7 +94,7 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
 
 - Resource Server의 승인
 
-  바로 토큰을 발급하는것이 아닌 auothorization code라는 임시 비밀번호를 Reource Owner에게 전송함
+  바로 토큰을 발급하는것이 아닌 auothorization code라는 임시 비밀번호를 Resource Owner에게 전송함
 
   ![image14.png](./image/oauth/image14.png)
 
@@ -126,3 +126,4 @@ third party Application에 아이디와 비밀번호를 제공하고 싶지 않�
   refresh token의 경우 api 호출 중 invalid token Error 발생시 refesh token을 보내 다시 access token을 새로 발급함
   
   이때 refresh token도 같이 발급 될 수 도 있음.
+
