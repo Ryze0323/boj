@@ -12,7 +12,7 @@ but javascript의 특징에는 비동기, 동시성, 논블로킹 IO가 등장�
 
 ### Javascript 동작 원리
 
- ![img](.\image\javascript\image1.png)
+ ![img](./image/javascript/image1.png)
 
 - 런타임은 메모리 힙과 콜 스텍으로 구성됨
 
@@ -50,7 +50,7 @@ console.log('foo and bar')
 
 - 런타임 환경: 브라우저 또는 Node.js 같은 것
 
-![img](.\image\javascript\image2.png)
+![img](./image/javascript/image2.png)
 
 - 이벤트 루프: 이벤트 발생 시 호출되는 콜백 함수들을 관리하여 태스크 큐에 전달하고, 태스크 큐에 담겨있는 콜백 함수들을 콜스택에 넘겨줌
    - 이벤트 루프가 태스크 큐에서 콜스택으로 콜백 함수를 넘겨주는 작업은 콜스택에 쌓여있는 함수가 없을때만 수행
