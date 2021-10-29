@@ -104,7 +104,7 @@
 
 - Patch는 기능에 버그를 해결했을 때 올림
 
-![image1.png](.\image\npm\image1.png)
+![image1.png](./image/npm/image1.png)
 
 #### 버전 앞에 기호를 붙여 의미를 더함
 
