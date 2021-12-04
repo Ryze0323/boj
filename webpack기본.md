@@ -2,7 +2,7 @@
 
 ### 페이지 로딩 속도 저하
 
-![img](C:\Users\user\Desktop\test\git\boj\image\webpack\image1.png)
+![img](./image/webpack/image1.png)
 
 웹 사이트를 개발할 때 JS, CSS, IMG 등 수많은 리소스 파일이 생겨납니다.
 
