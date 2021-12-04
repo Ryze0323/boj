@@ -43,9 +43,13 @@ Node.js의 이벤트 루프를 설명하기 전에, Node.js가 내부적으로 �
 ![img](./image/nodejsProcess/image1.png)
 
 ```
-* Node.js는 Javascript와 C++언어로 구성되어 있습니다. V8엔진도 70% 이상의 C++로 구성되어 있으며, libuv는 100%의 C++언어로 구성된 라이브러리 입니다. 하지만 우리는 C/C++언어를 몰라도  Node.js는 사용할 수 있습니다. 이는 V8 엔진에서 Javascript를 C++로 Translate 해주기 때문에 가능한 일입니다. 또한 Node.js의 코어 라이브러리는 process.binding()을 통해 Javascript 환경에서 사용될 수 있습니다.
+* Node.js는 Javascript와 C++언어로 구성되어 있습니다. V8엔진도 70% 이상의 C++로 구성되어 있으며, libuv는 100%의 C++언어로 구성된 라이브러리 입니다. 
+하지만 우리는 C/C++언어를 몰라도  Node.js는 사용할 수 있습니다. 이는 V8 엔진에서 Javascript를 C++로 Translate 해주기 때문에 가능한 일입니다. 
+또한 Node.js의 코어 라이브러리는 process.binding()을 통해 Javascript 환경에서 사용될 수 있습니다.
 
-* Node.js에 동작하는 이벤트 루프는 libuv 내에서 구현됩니다. 이벤트 루프가 libuv 내에서 실행된다고 해서, Javascript의 스레드와 이벤트 루프의 스레드가 별도로 존재한다고 생각하실 수 있습니다. 하지만 Node.js는 싱글스레드이기 때문에 하나의 이벤트 루프를 갖으며, 하나의 스레드가 모든 것을 처리합니다.
+* Node.js에 동작하는 이벤트 루프는 libuv 내에서 구현됩니다. 
+이벤트 루프가 libuv 내에서 실행된다고 해서, Javascript의 스레드와 이벤트 루프의 스레드가 별도로 존재한다고 생각하실 수 있습니다. 
+하지만 Node.js는 싱글스레드이기 때문에 하나의 이벤트 루프를 갖으며, 하나의 스레드가 모든 것을 처리합니다.
 ```
 
 Node.js를 크게 나눠봤을 때, 내장 라이브러리와 v8엔진 그리고 **libuv**로 구성되어 있습니다. Node.js의 특성인 이벤트 기반, 논블로킹 I/O 모델들은 모두 **libuv 라이브러리에서 구현**됩니다.
