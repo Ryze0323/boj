@@ -1,17 +1,17 @@
-const todos = [
-  { id: 3, content: 'HTML', completed: false },
-  { id: 2, content: 'CSS', completed: true },
-  { id: 1, content: 'Javascript', completed: false }
-];
+// 비동기
+const {promisify} = require('util');
+const exec = promisify(require('child_process').exec)
+const start = new Date()
+const ary = []
+async function execute(){
+    for (let i = 0; i < 5; i++) {
+        ary.push(i)
+    }
+    
+    await Promise.all(ary.map(()=> {
+        return exec('cd ../ & git branch -a')
+    }))
+    console.log('exec final time: ' + (new Date() - start));
+}
 
-const getArray = array => property => array.map(object => object[property]);
-
-const todosGetArray = getArray(todos);
-
-const getTodosIdArr = todosGetArray('id');
-const getTodosContentArr = todosGetArray('content');
-const getTodosCompletedArr = todosGetArray('completed');
-
-console.log(getTodosIdArr); // [ 3, 2, 1 ]
-console.log(getTodosContentArr); // [ 'HTML', 'CSS', 'Javascript' ]
-console.log(getTodosCompletedArr); // [ false, true, false ]
+execute()
