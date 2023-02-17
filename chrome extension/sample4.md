@@ -69,14 +69,6 @@ chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
     chrome.tabs.sendMessage(tabs[0].id, {action: "open_dialog_box"}, function(response) {});  
 });
 ```
-The chrome.runtime.onMessage function is used to register a listener on the receiving end to messages sent by the chrome.runtime.sendMessage function. The function receives a callback function to run when a message arrives. That callback gets 3 arguments:
-
-- request — details about the request.
-- sender — the sender of the request.
-- sendResponse — helper function that enables to send response back to the sender.
-
-Let’s take a look at a simple onMessage example:
-
 chrome.runtime.onMessage 함수는 수신 측에서 chrome.runtime.sendMessage 함수가 보낸 메시지에 대한 리스너를 등록하는 데 사용됩니다. 이 함수는 메시지가 도착하면 실행할 콜백 함수를 받습니다. 이 콜백은 3개의 인수를 얻습니다.
 
 - request — 요청에 대한 세부 정보입니다.
