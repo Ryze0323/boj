@@ -156,3 +156,39 @@ SSR과 달리 페이지가 즉시 제공되며(fallback page), 빠른 경험으�
 ### ISR 단점
 
 페이지 디자인에 따라 첫번째 의미있는 페인팅을 지연시킬 수도 있다.
+
+# 실제 업무에서 적용한 기법
+
+## 현재
+
+우리는 현재 csr(vue)를 이용하고 있다.
+이 상황에서 초기 페이지 렌더링 시간이 너무 오래 걸리는 문제가 발생했다.
+
+![image8](./image/csr,ssr,ssg/image8.png)
+
+아래는 현재 prod에서 light house를 통해 페이지의 성능을 측정한 것이다.
+(prod의 경우 그나마 webpack 빌드시 모듈의 사이즈를 많이 쳐내서 이정도... dev와 stg는... 성능이 이것의 반정도....)
+
+![image6](./image/csr,ssr,ssg/image6.png)
+
+이 아래는 network tab에서 로그인 페이지에 접속시 보이는 network 들이다.
+(여기서는 kb인 애들이 dev, stg는.... mb...)
+
+![image7](./image/csr,ssr,ssg/image7.png)
+
+## 작업 1(module 사이즈를 줄여보고 나눠보자, 현재 운영 반영)
+
+1. cs의 경우 chunk를 나누지 않았다.... 따라서 나누도록 수정
+2. gzip을 적용하자(https://docs.aws.amazon.com/ko_kr/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html, compression-webpack-plugin(https://www.npmjs.com/package/compression-webpack-plugin))
+3. 실제 사용중인 모듈을 분석하자(https://www.npmjs.com/package/webpack-bundle-analyzer)
+4. import를 동적 import로 수정하자
+
+## 작업 2(SSG 적용, 추후 운영 반영)
+
+사실 이때 SSR과 SSG에 대해 어떤 것을 지금 현 상황에 적용할지 고민 했다. SSR은 일단 잘나가는 NEXT.js, NUXT.js 등 프레임워크가 너무 잘되 있다라는 장점이 있다.
+
+그런데 현재 만들어진 우리 프로젝트를 통째로 NEXT.js나 NUXT.js로 바꾸기에는 너무 말이 안된다는 생각이 들었다....
+
+그래서 그 방법이 아닌 첫 페이지가 속도가 느린 것이니 첫페이지를 SSG로 전환하고 그 이후의 화면 변화는 cSR에게 맞기자고 생각함.
+
+관련 라이브러리(https://www.npmjs.com/package/prerender-spa-plugin?activeTab=readme) deprecated 되었지만.... 그나마 찾은게 이거다...
