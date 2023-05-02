@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Fetch Example Extension",
+  "version": "1.0",
+  "description": "An extension that fetches data from an API.",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"]
+  }]
+}
