@@ -19,7 +19,7 @@ manifest file:
   "name": "My Extension",
   "version": "1.0",
   "description": "A simple extension that adds a button to the browser.",
-  "browser_action": {
+  "action": {
     "default_icon": "icon.png",
     "default_popup": "popup.html"
   },
