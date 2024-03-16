@@ -12,12 +12,12 @@ function UserPosts() {
   if (error) return <p>Error :(</p>;
 
   return (
-    <div>
+    <div style={{paddingLeft: "10px"}}>
       <h3>User Posts:</h3>
-      {data.posts.map(({ _id, title, content }) => (
+      {data.user.posts && data.user.posts.map(({ _id, title, content }) => (
         <div key={_id}>
           <h4>{title}</h4>
-          <p>{content}</p>
+          <p>content: {content}</p>
         </div>
       ))}
       <Link to={`/users`}>Back to Users</Link>

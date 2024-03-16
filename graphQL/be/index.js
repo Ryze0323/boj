@@ -1,6 +1,6 @@
 const { ApolloServer } = require('apollo-server');
 const mongoose = require('mongoose');
-const typeDefs = require('./schema');
+const typeDefs = require('./graphql/schema/');
 const resolvers = require('./graphql/resolvers');
 
 // MongoDB에 연결

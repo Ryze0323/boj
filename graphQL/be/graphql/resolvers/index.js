@@ -11,19 +11,33 @@ function generateUUID() {
 }
 
 const getUserInfo = async (authorId) => {
-  return await User.findOne({ userId: authorId }).exec()
+  return  User.findOne({ userId: authorId }).exec()
+}
+const getPostInfo = async (userId) => {
+  return  Post.find({ authorId: userId }).exec()
 } 
 
 const resolvers = {
   Query: {
-    user: async (_, { userId }) => await User.findOne({ userId }),
+    user: async (_, { userId }) => {
+      const {name, email} = await User.findOne({ userId })
+      const posts= await getPostInfo(userId)
+      console.log(posts);
+      return {
+        userId,
+        name,
+        email,
+        posts
+      }
+    },
     users: async () => await User.find({}),
     posts: async () => {
       try {
         const posts = await Post.find().exec();
-        return posts.map(async ({title, content,authorId}) => {
+        return posts.map(async ({postId,title, content,authorId}) => {
           author = await getUserInfo(authorId)
           return {
+            postId,
             title,
             content,
             author
@@ -36,7 +50,6 @@ const resolvers = {
     post: async (_, {postId}) => {
       try {
         const {title, content, authorId} = await Post.findOne({ postId }).exec();
-        console.log(title, content, authorId);
         const author = await getUserInfo(authorId)
         console.log(author);
         return {
@@ -55,7 +68,7 @@ const resolvers = {
       const newUser = new User({ userId, name, email })
       await newUser.save();
       console.log(newUser);
-      return userId;
+      return newUser;
     },
     createPost: async (_, { title, content, authorId }) => {
       const postId = generateUUID();

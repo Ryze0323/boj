@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation, gql } from '@apollo/client';
 import { GET_USERS, CREATE_USER } from '../queries/userQueries';
-
+import { useNavigate } from 'react-router-dom';
 function Users() {
   const { loading, error, data } = useQuery(GET_USERS);
   const [createUser, { loading: creatingUser }] = useMutation(CREATE_USER, {
@@ -27,11 +27,17 @@ function Users() {
     }
   };
 
+  let navigate = useNavigate ();
+
+  function handleClick(path) {
+    navigate(`/user/${path}`); // 여기서 "/new-path"는 이동하고자 하는 경로입니다.
+  }
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div>
+    <div style={{paddingLeft: "10px"}}>
       <h3>Create New User:</h3>
       <input
         value={name}
@@ -50,9 +56,16 @@ function Users() {
       </button>
 
       <h3>Users:</h3>
-      <ul>
-        {data && data.users.map(({ id, name, email }) => (
-          <li key={id}>{name} ({email})</li>
+      <ul style={{ 
+            width: "400px",
+          }}>
+        {data && data.users.map(({ userId, name, email }) => (
+          <li style={{ 
+            border: '1px solid black',
+            cursor: 'pointer',
+            
+            paddingLeft: "10px"
+          }} key={userId} onClick={() => handleClick(userId)}>{name} ({email})</li>
         ))}
       </ul>
     </div>

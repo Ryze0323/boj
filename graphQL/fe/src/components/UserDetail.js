@@ -6,13 +6,13 @@ import { useParams, Link } from 'react-router-dom';
 
 function UserDetail() {
   let { userId } = useParams();
-  const { loading, error, data } = useQuery(GET_USER, { variables: { id: userId } });
+  const { loading, error, data } = useQuery(GET_USER, { variables: { userId } });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
 
   return (
-    <div>
+    <div style={{paddingLeft: "10px"}}>
       <h3>{data.user.name}</h3>
       <p>Email: {data.user.email}</p>
       <Link to={`/user/${userId}/posts`}>View Posts</Link>
