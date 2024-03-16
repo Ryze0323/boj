@@ -1,2 +1,9 @@
-ªxVùÆö¥—»rõÚåKW2Pk£‹“Á#ƒìœB…)®b»¼¯³¢È&W/^Şº,P}r§i´Õ‰ì»U=Mzıåòâ—OOêÅ¬=Q29äÄmkõÌNîÜ|ë½Ÿ|ÿÖ›7ï¼ıŞ_úÆ­wT•3c¢Tó…%ÅÜÄº.W'±jUs¥´1!T±ZÕ‹¡Õfë:úÒˆnV"””Úƒ&´óv5½wë[·^iª
-”
+const mongoose = require('mongoose');
+
+const userSchema = new mongoose.Schema({
+  userId: String,
+  name: String,
+  email: String
+});
+
+module.exports = mongoose.model('User', userSchema);
