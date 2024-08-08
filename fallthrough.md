@@ -112,7 +112,12 @@ export default {
 ## 결론
 Vue 3의 Fallthrough 메커니즘은 컴포넌트 간 속성 전달을 더 간편하고 직관적으로 만들어줍니다. 이를 통해 부모 컴포넌트에서 전달된 속성들이 자식 컴포넌트의 루트 엘리먼트에 자동으로 적용되어, 컴포넌트 작성 시의 편의성과 유연성을 높일 수 있습니다. Vue 2와 비교했을 때, 이러한 변화는 속성 전달의 복잡성을 줄이고 코드의 가독성을 높이는 데 큰 도움이 됩니다.
 
-## fallthrogh를 이용한 컴포넌트 테스트?
+## fallthrough를 이용한 컴포넌트 테스트?
+
+### vue에서 emit
+https://ko.vuejs.org/guide/components/events
+
+> 네이티브 DOM 이벤트와 달리, 컴포넌트에서 발생한 이벤트는 버블링되지 않습니다. 직접 자식 컴포넌트에서 발생한 이벤트만 수신할 수 있습니다. 형제 컴포넌트나 깊숙이 중첩된 컴포넌트 간에 통신이 필요한 경우, 외부 이벤트 버스 또는 글로벌 상태 관리 솔루션을 사용하세요.
 
 ### 컴포넌트 구조
 1. 조상 컴포넌트 (AncestorComponent.vue):
@@ -123,7 +128,7 @@ Vue 3의 Fallthrough 메커니즘은 컴포넌트 간 속성 전달을 더 간�
 2. 부모의 부모 컴포넌트 (GrandparentComponent.vue):
 
 - ParentComponent에 message prop을 전달하고, update 이벤트를 리슨합니다.
-update 이벤트가 발생하면 이를 - forwardUpdate 메서드를 통해 조상 컴포넌트로 전달합니다.
+- update 이벤트가 발생하면 이를 forwardUpdate 메서드를 통해 조상 컴포넌트로 전달합니다.
 
 3. 부모 컴포넌트 (ParentComponent.vue):
 
@@ -245,3 +250,10 @@ export default {
 조상 컴포넌트는 메시지를 부모의 부모 컴포넌트로 전달하고, 부모의 부모 컴포넌트는 이를 부모 컴포넌트로 전달하며, 최종적으로 자식 컴포넌트로 전달합니다.
 
 자식 컴포넌트에서 발생한 update 이벤트는 부모 컴포넌트를 거쳐 부모의 부모 컴포넌트로, 그리고 최종적으로 조상 컴포넌트로 전달됩니다.
+
+## bug?
+https://github.com/vuejs/core/discussions/8350
+
+## fallthrough 공식 사이트
+
+https://ko.vuejs.org/guide/components/attrs

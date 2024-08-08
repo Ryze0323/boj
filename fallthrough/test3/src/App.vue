@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld msg="Welcome to Your Vue.js App" @update="update" />
   </div>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   name: 'App',
   components: {
     HelloWorld
+  },
+  methods: {
+    update() {
+      console.log("Updated event received in App");
+    }
   }
 }
 </script>

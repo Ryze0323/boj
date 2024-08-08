@@ -13,7 +13,6 @@ export default {
   methods: {
     handleUpdate(payload) {
       console.log("Updated event received in AncestorComponent");
-      this.$emit("update", payload)
     }
   }
 }

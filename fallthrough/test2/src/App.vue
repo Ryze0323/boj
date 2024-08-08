@@ -1,7 +1,7 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
 const update = () => {
-  //console.log("Updated event received in App");
+  console.log("Updated event received in App");
 }
 </script>
 

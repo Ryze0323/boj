@@ -1,5 +1,7 @@
 <template>
-  <ChildComponent :message="message" @update="forwardUpdate" />
+<div>
+ <ChildComponent :message="message" @update="forwardUpdate" />
+</div>
 </template>
 
 <script>
@@ -16,7 +18,6 @@ export default {
   methods: {
     forwardUpdate(payload) {
       console.log("Updated event received in ParentComponent");
-      this.$emit('update', payload);
     }
   }
 }

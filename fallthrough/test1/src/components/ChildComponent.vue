@@ -1,6 +1,7 @@
 <template>
   <div>
     Child Component Content
+    {{ $attrs }}
   </div>
 </template>
 

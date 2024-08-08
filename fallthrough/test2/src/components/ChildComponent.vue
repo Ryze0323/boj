@@ -8,6 +8,7 @@
 <script>
 export default {
   name: 'ChildComponent',
+  inheritAttrs: false,
   props: {
     message: String
   },

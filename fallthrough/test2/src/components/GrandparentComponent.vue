@@ -16,7 +16,6 @@ export default {
   methods: {
     forwardUpdate(payload) {
       console.log("Updated event received in GrandparentComponent");
-      this.$emit('update', payload);
     }
   }
 }
