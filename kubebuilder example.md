@@ -133,3 +133,60 @@ func (r *MonitorReconciler) SetupWithManager(mgr ctrl.Manager) error {
         Complete(r)
 }
 ```
+
+### 5. 매니페스트 생성
+
+Kubebuilder를 사용하여 CRD 및 필요한 매니페스트 파일을 생성합니다.
+
+```bash
+make manifests
+```
+
+### 6. 컨트롤러 테스트 및 실행
+
+로컬에서 컨트롤러를 실행하여 기능을 테스트합니다.
+
+```bash
+make run
+```
+
+### 7. 이미지 빌드 및 배포
+
+컨트롤러의 도커 이미지를 빌드하고 Kubernetes 클러스터에 배포합니다.
+
+```bash
+make docker-build docker-push IMG=<your-image-repo>/monitor-operator:tag
+make deploy IMG=<your-image-repo>/monitor-operator:tag
+```
+
+### 8. Custom Resource 생성 및 모니터링
+
+모니터링할 URL을 지정하여 Monitor 리소스를 생성합니다.
+
+```yaml
+apiVersion: monitoring.example.com/v1
+kind: Monitor
+metadata:
+  name: example-monitor
+spec:
+  url: https://example.com
+```
+
+이 파일을 `monitor.yaml`로 저장한 후, 클러스터에 적용합니다.
+
+```bash
+kubectl apply -f monitor.yaml
+```
+
+### 9. 결과 확인
+
+생성된 Monitor 리소스의 상태를 확인하여 URL의 가용성 여부를 체크합니다.
+
+```bash
+kubectl get monitors
+kubectl describe monitor example-monitor
+```
+
+### 결론
+
+이 예제에서는 Kubebuilder를 사용하여 간단한 모니터링 오퍼레이터를 구현하였습니다. 이 오퍼레이터는 주어진 URL의 가용성을 체크하고, 그 결과를 Kubernetes CR의 상태로 반영합니다. 이를 통해 복잡한 모니터링 로직을 자동화하고, Kubernetes 리소스를 통해 손쉽게 모니터링 결과를 관리할 수 있습니다. 이 패턴을 확장하여 다양한 서비스의 모니터링 및 관리를 자동화할 수 있습니다.
