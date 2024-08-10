@@ -1,7 +1,7 @@
 
 # Kubebuilder 명령어: `init`와 `create api`
 
-Kubebuilder는 Kubernetes 오퍼레이터를 개발할 때 프로젝트 초기화 및 API 생성을 쉽게 해주는 명령어를 제공합니다. `kubebuilder init`와 `kubebuilder create api` 명령어는 각각 프로젝트 설정과 리소스 생성에 사용되며, 다양한 옵션을 통해 커스터마이즈할 수 있습니다. 여기서는 각 명령어의 주요 옵션과 그 기능 및 목적에 대해 상세히 설명하겠습니다.
+Kubebuilder는 Kubernetes 오퍼레이터를 개발할 때 프로젝트 초기화 및 API 생성을 쉽게 해주는 명령어를 제공합니다. `kubebuilder init`와 `kubebuilder create api` 명령어는 각각 프로젝트 설정과 리소스 생성에 사용되며, 다양한 옵션을 통해 커스터마이즈할 수 있습니다
 
 ## `kubebuilder init` 명령어
 
