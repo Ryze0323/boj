@@ -49,39 +49,30 @@ type PodWatcherStatus struct {
 
 ```go
 func (r *PodWatcherReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-    log := log.FromContext(ctx)
+	log := log.FromContext(ctx)
+	// Fetch the PodWatcher instance
+	var podWatchers monitoringv1.PodWatcherList
 
-    // Fetch the PodWatcher instance
-    var podWatcher monitoringv1.PodWatcher
-    if err := r.Get(ctx, req.NamespacedName, &podWatcher); err != nil {
-        log.Error(err, "unable to fetch PodWatcher")
-        return ctrl.Result{}, client.IgnoreNotFound(err)
-    }
+	if err := r.List(ctx, &podWatchers, client.InNamespace(req.NamespacedName.Namespace)); err != nil {
+		return ctrl.Result{}, err
+	}
 
-    // List all Pods in the specified namespace
-    var pods corev1.PodList
-    if err := r.List(ctx, &pods, client.InNamespace(podWatcher.Spec.Namespace)); err != nil {
-        log.Error(err, "unable to list Pods")
-        return ctrl.Result{}, err
-    }
+	if len(podWatchers.Items) != 0 {
+		podWatcher := podWatchers.Items[0]
+		var pods corev1.PodList
+		if err := r.List(ctx, &pods, client.InNamespace(podWatcher.Namespace)); err != nil {
+			return ctrl.Result{}, err
+		}
 
-    // Update the PodWatcher status with the observed Pods
-    observedPodNames := make([]string, len(pods.Items))
-    for i, pod := range pods.Items {
-        observedPodNames[i] = pod.Name
-    }
-    podWatcher.Status.ObservedPods = observedPodNames
+		if len(pods.Items) != 0 {
+			pod := pods.Items[0]
+			log.Info(pod.Namespace)
+			log.Info(pod.Name)
+		}
+	}
 
-    // Update the status
-    if err := r.Status().Update(ctx, &podWatcher); err != nil {
-        log.Error(err, "unable to update PodWatcher status")
-        return ctrl.Result{}, err
-    }
-
-    log.Info("reconciled PodWatcher", "namespace", podWatcher.Spec.Namespace, "pods", observedPodNames)
-    return ctrl.Result{}, nil
+	return ctrl.Result{}, nil
 }
-
 func (r *PodWatcherReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&monitoringv1.PodWatcher{}).
