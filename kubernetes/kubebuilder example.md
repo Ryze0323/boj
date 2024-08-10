@@ -83,10 +83,13 @@ func (r *PodWatcherReconciler) Reconcile(ctx context.Context, req ctrl.Request) 
 }
 
 func (r *PodWatcherReconciler) SetupWithManager(mgr ctrl.Manager) error {
-    return ctrl.NewControllerManagedBy(mgr).
-        For(&monitoringv1.PodWatcher{}).
-        Owns(&corev1.Pod{}).
-        Complete(r)
+	return ctrl.NewControllerManagedBy(mgr).
+		For(&monitoringv1.PodWatcher{}).
+		Watches(
+			&source.Kind{Type: &corev1.Pod{}},
+			&handler.EnqueueRequestForObject{},
+		).
+		Complete(r)
 }
 ```
 
